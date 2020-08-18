@@ -39,7 +39,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
     <property name="ts.external.directory.path" value="C:\Users\wj108\Downloads\H2O_TeamProject_Client-master\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -117,7 +117,7 @@
       <workItem from="1597561773845" duration="20792000" />
       <workItem from="1597623152766" duration="1308000" />
       <workItem from="1597624664520" duration="38350000" />
-      <workItem from="1597737140973" duration="404000" />
+      <workItem from="1597737140973" duration="1034000" />
     </task>
     <servers />
   </component>
@@ -159,15 +159,15 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1597420788384" />
-    <state x="592" y="217" key="FileChooserDialogImpl" timestamp="1597466093191">
+    <state x="592" y="217" key="FileChooserDialogImpl" timestamp="1597737814043">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="592" y="217" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1597466093191" />
+    <state x="592" y="217" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1597737814043" />
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1597136008452" />
-    <state x="646" y="310" key="Github.ShareDialog" timestamp="1597643191980">
+    <state x="646" y="310" key="Github.ShareDialog" timestamp="1597737825485">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="646" y="310" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1597643191980" />
+    <state x="646" y="310" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1597737825485" />
     <state x="218" y="117" key="Github.UntrackedFilesDialog" timestamp="1597643238316">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -192,6 +192,10 @@
     </state>
     <state width="1515" height="270" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597737294970" />
     <state width="1845" height="162" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597209750642" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1597738215902">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1597738215902" />
     <state x="481" y="194" key="run.anything.popup" timestamp="1597583293762">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
