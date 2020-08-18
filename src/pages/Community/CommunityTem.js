@@ -5,21 +5,44 @@ import axios from 'axios'
 import {Link} from "react-router-dom";
 
 
-const POST_LIST = "POST_LIST";
-export const postListReducer = (state = [], action) =>{
-    switch (action.type){
-        case POST_LIST:
-            return action.payload;
-        default:
-            return state;
-    }
-}
+// const POST_LIST = "POST_LIST"; 
+// export const getUploadList= action =>({type:POST_LIST})
+// export const postListReducer = (state = [], action) =>{
+//     switch (action.type){
+//         case POST_LIST: return action.payload;
+//         default: return state;
+//     }
+// }
+//
+// export const jpostList = ()=>{
+//     axios.get(``)
+//         .then(jdata=>{
+//             dispatch(getUploadList(jdata.data))
+//         })
+//         .catch(error=>{throw error})
+// }
+
+
+
 
 const CommunityTem = () => {
     const [postList, setPostList] = useState([])
     const [medCategory, setMedCategory] = useState('')
     const [sendList, setSendList] = useState([])
 
+
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:8080/board/list')
+            .then(({data})=>{
+                console.log(data);
+                setPostList(data)
+            })
+            .catch((err)=>{
+                throw err;
+            })
+    }, [])
 
 const changeCategory = (e)=>{
         if (e.target.value==='전체보기'){
@@ -60,17 +83,7 @@ const changeCategory = (e)=>{
         window.location.href="/Review"
     }
 
-    useEffect(() => {
-        axios
-            .get('http://localhost:8080/board/list')
-            .then(({data})=>{
-                console.log(data);
-                setPostList(data)
-            })
-            .catch((err)=>{
-                throw err;
-            })
-    }, [])
+
 
 
     return (

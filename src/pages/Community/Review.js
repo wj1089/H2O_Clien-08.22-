@@ -7,6 +7,23 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import ReactQuill from "react-quill";
 
+// const POST_LIST = "POST_LIST";
+// export const getUploadList= action =>({type:POST_LIST})
+// export const postListReducer = (state = [], action) =>{
+//     switch (action.type){
+//         case POST_LIST: return action.payload;
+//         default: return state;
+//     }
+// }
+//
+// export const jpostList = ()=>{
+//     axios.get(``)
+//         .then(jdata=>{
+//             dispatch(getUploadList(jdata.data))
+//         })
+//         .catch(error=>{throw error})
+// }
+
 
 const Review = ({match}) => {
     const [postList, setPostList] = useState('')
@@ -22,7 +39,7 @@ const Review = ({match}) => {
 
 
     useEffect(()=>{
-        console.log(`1`)
+
         console.log(boardNo)
 
         axios
@@ -50,10 +67,10 @@ const Review = ({match}) => {
             creationDate : creationDate
         }
         axios
-            .post(`http://localhost:8080/board/list/medCategory`,updata)
+            .post(`http://localhost:8080/modify/${match.params.boardNo}`,updata)
             .then((res)=>{
                 console.log(res.data);
-                window.location.href ="/Community/Review"
+                window.location.href ="/Community"
             })
             .catch((err)=>{
                 throw err;
