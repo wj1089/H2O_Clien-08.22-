@@ -113,7 +113,6 @@ const changeCategory = (e)=>{
                                 <td id="title"><Link to={`/Community/Review/${info.boardNo}`}>{info.title}</Link></td>
                                 {/*<td>{info.content}</td>*/}
                                 <td>{info.creationDate}
-                                    {new Date().toLocaleString()}
                                 </td>
                                 <td>empty</td>
                             </tr>
