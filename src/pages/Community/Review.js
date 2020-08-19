@@ -3,27 +3,9 @@ import {Container,Form, Button,Table,} from "react-bootstrap";
 import 'react-quill/dist/quill.snow.css';
 import './styles.css'
 import './community.css'
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import axios from "axios";
 import ReactQuill from "react-quill";
-
-// const POST_LIST = "POST_LIST";
-// export const getUploadList= action =>({type:POST_LIST})
-// export const postListReducer = (state = [], action) =>{
-//     switch (action.type){
-//         case POST_LIST: return action.payload;
-//         default: return state;
-//     }
-// }
-//
-// export const jpostList = ()=>{
-//     axios.get(``)
-//         .then(jdata=>{
-//             dispatch(getUploadList(jdata.data))
-//         })
-//         .catch(error=>{throw error})
-// }
-
 
 const Review = ({match}) => {
     const [postList, setPostList] = useState('')
@@ -33,21 +15,22 @@ const Review = ({match}) => {
     const [readOnly, setReadOnly] = useState(true)
     const [value, setValue] = useState('')
     const [creationDate, setCreationDate] = useState('')
+
+    const history = useHistory()
+
     const handleQuill = (value)=>{
         setValue(value)
     }
 
 
     useEffect(()=>{
-
-        console.log(boardNo)
-
         axios
             .get(`http://localhost:8080/board/list/getOne/${match.params.boardNo}`)
             .then((res)=>{
-                console.log(res.data)
-                setContent(res.data)
+                console.log(`java에서 넘어온 data`+res.data.boardNo)
+                setPostList(res.data)
                 setBoardNo(res.data.boardNo)
+                // setContent(res.data.boardNo)
                 //  setTitle(res.data.title)
             })
             .then((err)=>{
@@ -58,24 +41,25 @@ const Review = ({match}) => {
 
     const updateBoard = e =>{
         e.preventDefault();
-        console.log(`boardNo ${setBoardNo}`)
+        console.log(`boardNo : ${boardNo}, title : ${title}, content : ${value}, creationDate : ${creationDate}`)
         // setReadOnly(false)
-        const updata ={
+        const uploadData ={
             boardNo: boardNo,
             title : title,
             content : value,
             creationDate : creationDate
         }
         axios
-            .post(`http://localhost:8080/modify/${match.params.boardNo}`,updata)
+            .post(`http://localhost:8080/board/modify`,uploadData)
             .then((res)=>{
                 console.log(res.data);
-                window.location.href ="/Community"
+                history.push('/Community')
+
             })
             .catch((err)=>{
                 throw err;
-            })};
-
+            })
+        };
 
 
     const getContent = e =>{
@@ -84,12 +68,12 @@ const Review = ({match}) => {
         setBoardNo(match.params.boardNo)
         setReadOnly(false)
         axios
-            .get(`http://localhost:8080/board/list/medCategory/${boardNo}`)
+            .get(`http://localhost:8080/board/list/medCategory/${match.params.boardNo}`)
             .then((res)=>{
-                // sessionStorage.setItem("board",JSON.stringify(res.data))
-                setPostList(res.data)
+                // setPostList(res.data)
                 setTitle(res.data)
                 setBoardNo(res.data)
+                setCreationDate(res.data)
             })
             .catch((err)=>{
                 throw err;
@@ -102,7 +86,7 @@ const Review = ({match}) => {
             .delete(`http://localhost:8080/board/list/delete/${match.params.boardNo}`)
             .then((res)=>{
                 console.log(res)
-                window.location.href="/Community"
+                history.push('/Community')
             })
             .catch((err)=>{
                 throw err;
@@ -123,31 +107,6 @@ const Review = ({match}) => {
         'link',
         'image']
 
-
-    // useEffect(() => {
-    //     const title =sessionStorage.getItem("title")
-    //     setTitle(title)
-    //     axios
-    //         .get(`http://localhost:8080/board/list/medCategory/${title}`)
-    //         .then(({data})=>{
-    //             console.log(data);
-    //             setPostList(data)
-    //         })
-    //         .catch((err)=>{
-    //             throw err;
-    //         })
-    // }, [])
-
-
-
-    // const [board] = useState(
-    //     JSON.parse(sessionStorage.getItem("board"))
-    // )
-
-
-
-
-
     return (
         <Container>
             <div className="Rev-tab">
@@ -160,27 +119,52 @@ const Review = ({match}) => {
                 <Table striped bordered hover size="sm"
                        value={content}
                        readOnly={readOnly}
-                    // onChange={getContent}
+                       // onChange={getContent}
                 >
                     <thead>
-                    <tr >
+                    <tr>
                         <th style={{width:"180px"}}>사용자</th>
+
                         <th>
                             제목 :
                             <textPath
-                                value={content}
-                                // onChange={getContent}
+                                value={postList.title}
+                                onChange={(e)=>{setTitle(title)}}
                             >
                                 {readOnly &&
-                                content.title}
+                                postList.title}
 
                                 {!readOnly &&
                                 <textarea>
-                                        {content.title}
-                                    </textarea>
+                                        {postList.title}
+                                </textarea>
                                 }
                             </textPath>
                         </th>
+
+
+                        {/*<th>*/}
+                        {/*    제목 :*/}
+                        {/*    <textPath*/}
+                        {/*        // value={postList.title}*/}
+                        {/*        value ={content}*/}
+                        {/*        onChange={(e)=>{setTitle(value)}}*/}
+                        {/*    >*/}
+                        {/*        {readOnly &&*/}
+                        {/*        postList.title}*/}
+
+                        {/*        {!readOnly &&*/}
+                        {/*        <textarea*/}
+                        {/*            className="titlebox"*/}
+                        {/*            value={postList.title}*/}
+                        {/*            onChange={(e)=>{setTitle(e.target.value)}}*/}
+                        {/*        >*/}
+                        {/*            {content.title}*/}
+
+                        {/*        </textarea>*/}
+                        {/*        }*/}
+                        {/*    </textPath>*/}
+                        {/*</th>*/}
                         <th style={{width:"150px"}}>게시날짜</th>
                     </tr>
                     </thead>
@@ -195,12 +179,13 @@ const Review = ({match}) => {
                         </td>
 
                         <td>
+
                             <textPath
                                 value={content}
                                 // onChange={getContent}
                             >
                                 {readOnly &&
-                                content.content
+                                postList.content
                                 }
 
                                 {!readOnly &&
@@ -213,15 +198,47 @@ const Review = ({match}) => {
                                     formats={formats}
                                 >
                                     <textarea className="quill-font">
-                                        {content.content}
+                                        {postList.content}
+                                        {/*onChange={(e)=>{setContent(e.target.value)}}*/}
                                     </textarea>
                                 </ReactQuill>
                                 }
 
                             </textPath>
+
+
+                            {/*<textPath*/}
+                            {/*    value={content}*/}
+                            {/*    onChange={getContent}*/}
+                            {/*    // onChange={(e)=>{setContent(value)}}*/}
+                            {/*>*/}
+                            {/*    {readOnly &&*/}
+                            {/*    postList.content*/}
+                            {/*    }*/}
+
+                            {/*    {!readOnly &&*/}
+
+                            {/*    <ReactQuill*/}
+                            {/*        theme="snow"*/}
+                            {/*        onChange={handleQuill}*/}
+                            {/*        modules={modules}*/}
+                            {/*        formats={formats}*/}
+                            {/*    >*/}
+                            {/*        <textarea className="quill-font"*/}
+                            {/*            value={postList.content}*/}
+                            {/*            onChange={(e)=>{setContent(e.target.value)}}*/}
+                            {/*            // onChange ={setContent}*/}
+                            {/*        >*/}
+                            {/*            {content.value}*/}
+                            {/*        </textarea>*/}
+                            {/*    </ReactQuill>*/}
+                            {/*    }*/}
+                            {/*</textPath>*/}
                         </td>
 
-                        <td>2020.07.31</td>
+                        <td
+                        value={creationDate}
+                        >{postList.value}</td>
                     </tr>
                     </tbody>
                 </Table>

@@ -11,28 +11,30 @@ const TablePage = () => {
     return (
         <div>
             <Route path="/Community" exact>
-                <div className="main-board">
+                {/*<div className="main-board">*/}
                     <CommunityTem/>
-                </div>
+                {/*</div>*/}
             </Route>
+
+           {/* <div className="main-board">*/}
+                <Route path={`/Community/Review/:boardNo`}
+                       render = {(props) => <Review {...props}/>}>
+                </Route>
+            {/*</div>*/}
+
             <Route path="/Community/CustomerServiceCenter">
-                <div className="main-board">
+                {/*<div className="main-board">*/}
                     <CustomerServiceCenter/>
-                </div>
+                {/*</div>*/}
             </Route>
 
             <Route path="/Community/QueAn">
-                <div className="main-board">
+                {/*<div className="main-board">*/}
                     <QueAn/>
-                </div>
+                {/*</div>*/}
             </Route>
 
-            <div className="main-board">
-                <Route path={`/Community/Review/:boardNo`}
-                       render = {(props) => <Review {...props}/>}>
 
-                </Route>
-            </div>
             {/*<Route path="/Community/CSFix">*/}
             {/*    <div className="main-board">*/}
             {/*        <Edit/>*/}

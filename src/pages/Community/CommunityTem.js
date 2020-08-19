@@ -2,34 +2,15 @@ import React, {useState,useEffect} from 'react';
 import './community.css'
 import {Button, Table,Form,Col} from "react-bootstrap";
 import axios from 'axios'
-import {Link} from "react-router-dom";
-
-
-// const POST_LIST = "POST_LIST"; 
-// export const getUploadList= action =>({type:POST_LIST})
-// export const postListReducer = (state = [], action) =>{
-//     switch (action.type){
-//         case POST_LIST: return action.payload;
-//         default: return state;
-//     }
-// }
-//
-// export const jpostList = ()=>{
-//     axios.get(``)
-//         .then(jdata=>{
-//             dispatch(getUploadList(jdata.data))
-//         })
-//         .catch(error=>{throw error})
-// }
-
-
+import {Link, useHistory} from "react-router-dom";
 
 
 const CommunityTem = () => {
     const [postList, setPostList] = useState([])
     const [medCategory, setMedCategory] = useState('')
     const [sendList, setSendList] = useState([])
-
+    const [creationDate, setCreationDate] = useState('')
+    const history = useHistory()
 
 
     useEffect(() => {
@@ -38,6 +19,7 @@ const CommunityTem = () => {
             .then(({data})=>{
                 console.log(data);
                 setPostList(data)
+                setCreationDate(data)
             })
             .catch((err)=>{
                 throw err;
@@ -58,8 +40,6 @@ const changeCategory = (e)=>{
             })
 
         }
-
-
 }
 
     const getBoard = () =>{
@@ -103,7 +83,7 @@ const changeCategory = (e)=>{
                             >
                                 <option>진료과구분</option>
                                 <option>전체보기</option>
-                                <option >정형외과</option>
+                                <option>정형외과</option>
                                 <option>내과</option>
                                 <option>신경과</option>
                                 <option>소아과</option>
@@ -132,18 +112,17 @@ const changeCategory = (e)=>{
                                 <td>{info.medCategory}</td>
                                 <td id="title"><Link to={`/Community/Review/${info.boardNo}`}>{info.title}</Link></td>
                                 {/*<td>{info.content}</td>*/}
-                                <td>empty</td>
+                                <td>{info.creationDate}
+                                    {new Date().toLocaleString()}
+                                </td>
                                 <td>empty</td>
                             </tr>
                         ))}
                     </tbody>
                 </Table>
                 <div className="button-right">
-                    <Button variant="outline-dark " onClick={()=>{ window.location.href ="/Edit"}}>글쓰기</Button>
+                    <Button variant="outline-dark " onClick={()=>{history.push('/Edit')}}>글쓰기</Button>
                 </div>
-                {/*<Button  onClick={updateBoard}>*/}
-                {/*    Submit*/}
-                {/*</Button>*/}
             </div>
 
         </>
