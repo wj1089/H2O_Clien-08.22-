@@ -32,6 +32,7 @@ const Review = ({match}) => {
         setTitle(res.data.title)
         setContent(res.data.content)
         setClick(res.data.click)
+        setCreationDate(res.data.creationDate)
         // setContent(res.data.boardNo)
         //  setTitle(res.data.title)
       })
@@ -50,7 +51,7 @@ const Review = ({match}) => {
     // boardNo: boardNo,
       title: title,
       content: content,
-      // creationDate: creationDate
+      creationDate: creationDate
     }
     axios
       .patch(`http://localhost:8080/board/modify/${boardNo}`, uploadData)
@@ -105,10 +106,11 @@ const Review = ({match}) => {
 
   return (
     <>
-      <h2 style={{'display': 'hidden'}}>BoardNo : {boardNo}</h2>
-      <h2>BoardNo : {boardNo}</h2>
-      {/*<h2>localDate : {creationDate(LocalDateTime.now())}</h2>*/}
-      <button onClick={()=>setClick(click+1)}>click me! : {click}</button>
+      {/*<h2 style={{'display': 'hidden'}}>BoardNo : {boardNo}</h2>*/}
+      {/*<h2>BoardNo : {boardNo}</h2>*/}
+      {/*/!*<h2>localDate : {creationDate(LocalDateTime.now())}</h2>*!/*/}
+      {/*<button onClick={()=>setClick(click+1)}>click me! : {click}</button>*/}
+      {/*<h2>CreateDate : {creationDate}</h2>*/}
 
       <Container>
         <div className="Rev-tab">
@@ -150,7 +152,6 @@ const Review = ({match}) => {
                   Donald J. Trump @realDonaldTrump
                 </textPath>
               </td>
-
               <td>
 
                 {readOnly &&
@@ -161,6 +162,7 @@ const Review = ({match}) => {
                   formats={formats}
                   readOnly
                 />}
+
                   {!readOnly &&
                   <ReactQuill
                     theme="snow"
@@ -168,24 +170,10 @@ const Review = ({match}) => {
                     onChange={handleQuill}
                     modules={modules}
                     formats={formats}
-
-                  >
-                                    {/*<textarea className="quill-font"*/}
-                                    {/*          value={content}*/}
-                                    {/*          onChange={(e) => {*/}
-                                    {/*            setContent(e.target.value)*/}
-                                    {/*          }}*/}
-                                    {/*  // onChange={(e)=>{setContent(content)}}*/}
-                                    {/*>*/}
-                                    {/*    {content}*/}
-                                    {/*</textarea>*/}
-                  </ReactQuill>
+                  />
                   }
-
-
               </td>
-
-              <td>게시날짜</td>
+              <td>{creationDate}</td>
             </tr>
             </tbody>
           </Table>
@@ -218,7 +206,7 @@ const Review = ({match}) => {
                 >수정완료
                 </Button>
                 <Button variant="outline-dark">
-                  <Link to='/Community/Review'>뒤로</Link>
+                  <Link to='/Community'>뒤로</Link>
                 </Button>
               </div>
             }
