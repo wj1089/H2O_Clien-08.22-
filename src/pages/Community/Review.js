@@ -6,6 +6,7 @@ import './community.css'
 import {Link, useHistory} from "react-router-dom";
 import axios from "axios";
 import ReactQuill from "react-quill";
+import {localeData} from "moment";
 
 const Review = ({match}) => {
   const [postList, setPostList] = useState('')
@@ -14,7 +15,7 @@ const Review = ({match}) => {
   const [boardNo, setBoardNo] = useState('')
   const [readOnly, setReadOnly] = useState(true)
   const [creationDate, setCreationDate] = useState('')
-
+  const [click, setClick] =useState(0)
   const history = useHistory()
 
   const handleQuill = (value) => {
@@ -30,6 +31,7 @@ const Review = ({match}) => {
         setBoardNo(res.data.boardNo)
         setTitle(res.data.title)
         setContent(res.data.content)
+        setClick(res.data.click)
         // setContent(res.data.boardNo)
         //  setTitle(res.data.title)
       })
@@ -37,6 +39,7 @@ const Review = ({match}) => {
         throw err;
       })
   }, [])
+
 
 
   const updateBoard = e => {
@@ -67,7 +70,7 @@ const Review = ({match}) => {
     console.log(`=========================`)
     console.log(`boardNo ${boardNo}`)
     //setBoardNo(match.params.boardNo)
-
+    console.log(`click ${click}`)
     setReadOnly(false)
 
   }
@@ -104,7 +107,8 @@ const Review = ({match}) => {
     <>
       <h2 style={{'display': 'hidden'}}>BoardNo : {boardNo}</h2>
       <h2>BoardNo : {boardNo}</h2>
-
+      {/*<h2>localDate : {creationDate(LocalDateTime.now())}</h2>*/}
+      <button onClick={()=>setClick(click+1)}>click me! : {click}</button>
 
       <Container>
         <div className="Rev-tab">
@@ -133,8 +137,6 @@ const Review = ({match}) => {
                     />)}
 
               </th>
-
-
               <th style={{width: "150px"}}>게시날짜</th>
             </tr>
             </thead>
@@ -183,9 +185,7 @@ const Review = ({match}) => {
 
               </td>
 
-              <td
-                value={creationDate}
-              >{postList.value}</td>
+              <td>게시날짜</td>
             </tr>
             </tbody>
           </Table>

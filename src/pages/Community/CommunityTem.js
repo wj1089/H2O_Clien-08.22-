@@ -10,6 +10,8 @@ const CommunityTem = () => {
     const [medCategory, setMedCategory] = useState('')
     const [sendList, setSendList] = useState([])
     const [creationDate, setCreationDate] = useState('')
+    const [click, setClick] = useState(0);
+    const [state, setState] = useState('')
     const history = useHistory()
 
 
@@ -18,8 +20,9 @@ const CommunityTem = () => {
             .get('http://localhost:8080/board/list')
             .then(({data})=>{
                 console.log(data);
-                setPostList(data)
-                setCreationDate(data)
+                setPostList(data);
+                setCreationDate(data);
+                setClick(data);
             })
             .catch((err)=>{
                 throw err;
@@ -41,6 +44,11 @@ const changeCategory = (e)=>{
 
         }
 }
+
+    const handleClick=()=>{
+        setState(state.value+1);
+    }
+
 
     const getBoard = () =>{
         console.log(medCategory)
@@ -110,11 +118,12 @@ const changeCategory = (e)=>{
                                 <td>empty</td>
                                 {/*<td>{info.user.userId}</td>*/}
                                 <td>{info.medCategory}</td>
-                                <td id="title"><Link to={`/Community/Review/${info.boardNo}`}>{info.title}</Link></td>
-                                {/*<td>{info.content}</td>*/}
-                                <td>{info.creationDate}
+                                <td id="title" onClick={()=>setClick(click+1)}>
+                                        <Link to={`/Community/Review/${info.boardNo}`}>{info.title}</Link>
                                 </td>
-                                <td>empty</td>
+                                {/*<td>{info.content}</td>*/}
+                                <td>{info.creationDate}</td>
+                                <td>{info.click}</td>
                             </tr>
                         ))}
                     </tbody>
