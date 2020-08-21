@@ -22,11 +22,26 @@ const TablePage = () => {
                 </Route>
             {/*</div>*/}
 
+            {/*/!* <div className="main-board">*!/*/}
+            {/*<Route path={`/Community/CustomerServiceCenter/:boardNo`}*/}
+            {/*       render = {(props) => <Review {...props}/>}>*/}
+            {/*</Route>*/}
+            {/*/!*</div>*!/*/}
+
+
             <Route path="/Community/CustomerServiceCenter">
                 {/*<div className="main-board">*/}
                     <CustomerServiceCenter/>
                 {/*</div>*/}
             </Route>
+
+
+            {/*/!* <div className="main-board">*!/*/}
+            {/*<Route path={`/Community/QueAn/:boardNo`}*/}
+            {/*       render = {(props) => <QueAn {...props}/>}>*/}
+            {/*</Route>*/}
+            {/*/!*</div>*!/*/}
+
 
             <Route path="/Community/QueAn">
                 {/*<div className="main-board">*/}

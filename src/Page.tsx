@@ -35,6 +35,16 @@ const Page = () => (
                     <QueAn/>
                     <Footer/>
             </Route>
+
+        {/*<Route path="/QAReview">*/}
+        {/*    <NavBar/>*/}
+        {/*    <Route path={`/Community/QAReview/:boardNo`}*/}
+        {/*           render = {(props) => <QAReview {...props}/>}>*/}
+        {/*    </Route>*/}
+        {/*    <Footer/>*/}
+        {/*</Route>*/}
+
+
             <Route path="/QAFix">
                     <NavBar/>
                     <QAFix/>
@@ -64,13 +74,23 @@ const Page = () => (
             </Route>
 
 
-            <Route path="/CSReview">
-                    <NavBar/>
-                    <CSReview/>
-                    <Footer/>
-            </Route>
+            {/*<Route path="/CSReview">*/}
+            {/*        <NavBar/>*/}
+            {/*        <CSReview/>*/}
+            {/*        <Footer/>*/}
+            {/*</Route>*/}
 
-            <Route path="/CSFix">
+        <Route path="/CSReview">
+            <NavBar/>
+            <Route path={`/Community/CSReview/:boardNo`}
+                   render = {(props) => <CSReview {...props}/>}>
+            </Route>
+            <Footer/>
+        </Route>
+
+
+
+        <Route path="/CSFix">
                     <NavBar/>
                     <CSFix/>
                     <Footer/>

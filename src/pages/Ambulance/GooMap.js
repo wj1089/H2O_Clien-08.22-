@@ -229,7 +229,6 @@ const GooMap = () =>{
                     }
 
 
-
                 {
                     markers.map((marker,i)=>(
                         <Marker
@@ -364,14 +363,12 @@ const GooMap = () =>{
             </GoogleMap>
 
                     <div className="map_container search_box">
-                        <Form className={"map_form"}>
+                        <Form className="map_form">
                             <Form.Row className="align-items-center">
                                 <Col xs="auto" className="my-lg-4">
                                     <Form.Label className="mr-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
                                         Preference
                                     </Form.Label>
-
-
 
                                     <Form>
                                         <Form.Group className="map-textbox">
@@ -400,9 +397,12 @@ const GooMap = () =>{
                                         </Col>
                                     </div>
 
-
                             </Form.Row>
+
                         </Form>
+                        {/*<div className="map-clickarea">*/}
+
+                        {/*</div>*/}
                     </div>
                      </div>
         </>

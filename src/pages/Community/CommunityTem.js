@@ -3,8 +3,7 @@ import './community.css'
 import {Button, Table,Form,Col} from "react-bootstrap";
 import axios from 'axios'
 import {Link, useHistory} from "react-router-dom";
-
-
+import {MDBCol, MDBPageItem, MDBPageNav, MDBPagination, MDBRow} from "mdbreact";
 const CommunityTem = () => {
     const [postList, setPostList] = useState([])
     const [medCategory, setMedCategory] = useState('')
@@ -13,6 +12,8 @@ const CommunityTem = () => {
     const [click, setClick] = useState(0);
     const [state, setState] = useState('')
     const history = useHistory()
+
+
 
 
     useEffect(() => {
@@ -112,7 +113,7 @@ const changeCategory = (e)=>{
                     </tr>
                     </thead>
                     <tbody>
-                        {sendList && sendList.map((info,i)=>(
+                        {sendList && sendList.reverse().map((info,i)=>(
                             <tr key={i}>
                                 <td>{i+1}</td>
                                 <td>empty</td>
@@ -128,9 +129,41 @@ const changeCategory = (e)=>{
                         ))}
                     </tbody>
                 </Table>
+
                 <div className="button-right">
                     <Button variant="outline-dark " onClick={()=>{history.push('/Edit')}}>글쓰기</Button>
                 </div>
+
+                <div>
+                    <MDBRow>
+                        <MDBCol>
+                            <MDBPagination className="mb-5">
+                                <MDBPageItem>
+                                    <MDBPageNav aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </MDBPageNav>
+                                </MDBPageItem>
+                                <MDBPageItem>
+                                    <MDBPageNav>
+                                        1
+                                    </MDBPageNav>
+                                </MDBPageItem>
+                                <MDBPageItem>
+                                    <MDBPageNav>2</MDBPageNav>
+                                </MDBPageItem>
+                                <MDBPageItem>
+                                    <MDBPageNav>3</MDBPageNav>
+                                </MDBPageItem>
+                                <MDBPageItem>
+                                    <MDBPageNav aria-label="Previous">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </MDBPageNav>
+                                </MDBPageItem>
+                            </MDBPagination>
+                        </MDBCol>
+                    </MDBRow>
+                </div>
+
             </div>
 
         </>
